@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="handleOptionsLogin">
         <div>
-            <label>帳號</label>
+            <label>帳號：</label>
             <input type="text" v-model="username" placeholder="請輸入帳號" />
         </div>
         <div style="margin-top: 10px;">

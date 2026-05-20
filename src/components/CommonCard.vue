@@ -3,7 +3,7 @@
     <div class="card shadow">
         <div class="card-header">
             <!-- 具名插槽，供外部客製化標題結構 -->
-             <slot class="title">預設區塊標題</slot>
+             <slot name="title">預設區塊標題</slot>
         </div>
         <div class="card-body">
             <!-- 預設插槽，放置主要內容 -->

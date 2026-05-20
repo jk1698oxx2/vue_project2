@@ -14,8 +14,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-// import CommonCard from './components/CommonCard.vue'
-// import LoginFormOptions from './components/LoginFormOptions.vue'
+import CommonCard from './components/CommonCard.vue'
+import LoginFormOptions from './components/LoginFormOptions.vue'
 // import LoginFormComp from './components/LoginFormComp.vue'
 
 const isLoggedIn = ref(false)

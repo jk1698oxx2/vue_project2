@@ -8,6 +8,10 @@
         <LoginFormOptions @login-success="onLoginSuccess" />
       </CommonCard>
 
+      <CommonCard>
+        <template #title>Composition API 登入表單</template>
+        <LoginFormComp @login-success="onLoginSuccess" />
+      </CommonCard>
     </div>
   </div>
 </template>
@@ -16,7 +20,7 @@
 import { ref } from 'vue'
 import CommonCard from './components/CommonCard.vue'
 import LoginFormOptions from './components/LoginFormOptions.vue'
-// import LoginFormComp from './components/LoginFormComp.vue'
+import LoginFormComp from './components/LoginFormComp.vue'
 
 const isLoggedIn = ref(false)
 const currentUsername = ref('')

@@ -13,6 +13,26 @@
         <LoginFormComp @login-success="onLoginSuccess" />
       </CommonCard>
     </div>
+
+    <!-- 查詢區塊：登入成功後跳出 -->
+    <div v-else class="main-section">
+      <div class="welcome-alert">
+        🎉 歡迎回來，<strong>{{ currentUsername }}</strong>！您已成功登入。
+        <button @click="logout" class="btn-logout">登出</button>
+      </div>
+
+      <CommonCard>
+        <template #title>保單資料查詢系統</template>
+        
+        <!-- 子元件1：負責輸入條件，透過 emit 把事件與資料傳上來 -->
+        <QueryForm @submit-search="handleSearchPolicy" />
+        
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;" />
+        
+        <!-- 子元件2：負責展示結果，由父元件透過 props 把資料送下去 -->
+        <QueryResult :resultData="searchResult" :loading="isSearching" />
+      </CommonCard>
+    </div>
   </div>
 </template>
 
@@ -21,13 +41,42 @@ import { ref } from 'vue'
 import CommonCard from './components/CommonCard.vue'
 import LoginFormOptions from './components/LoginFormOptions.vue'
 import LoginFormComp from './components/LoginFormComp.vue'
+import QueryForm from './components/QueryForm.vue'
+import QueryResult from './components/QueryResult.vue'
 
+// 登入狀態控制
 const isLoggedIn = ref(false)
 const currentUsername = ref('')
+
+// 查詢狀態與資料
+const isSearching = ref(false)
+const searchResult = ref<{ id: string; owner: string; status: string; date: string } | null>(null)
 
 const onLoginSuccess = (username: string) => {
   currentUsername.value = username
   isLoggedIn.value = true
+}
+
+const logout = () => {
+  isLoggedIn.value = false
+  currentUsername.value = ''
+  searchResult.value = null
+}
+
+// 模擬 API 查詢行為
+const handleSearchPolicy = (policyNo: string) => {
+  isSearching.value = true
+  searchResult.value = null
+
+  setTimeout(() => {
+    searchResult.value = {
+      id: policyNo,
+      owner: currentUsername.value,
+      status: '有效保單',
+      date: '2026-01-15'
+    }
+    isSearching.value = false
+  }, 800) // 模擬 0.8 秒的網路延遲
 }
 
 </script>
